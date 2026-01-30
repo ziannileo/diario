@@ -6,11 +6,20 @@
     <title>Diário Bina</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
 </head>
 <body>
+
+    <div id="loader">
+        <div class="heart-container">
+            <div class="heart"></div>
+        </div>
+
+        <p>Abrindo memórias...</p>
+    </div>
     
-    <div id="diario-container" class="diario-container">
-        <canvas id="diario-render"></canvas>
+    <div class="diario-render">
+        <div id="diario-container" class="diario"></div>
     </div>
 
     <script src="script.js"></script>
