@@ -88,6 +88,7 @@ body {
     height: auto !important;
     visibility: hidden;
     opacity: 0;
+    background: none !important; 
 }
 
 .diario.st--ready {
@@ -96,7 +97,7 @@ body {
 }
 
 .page {
-    background-color: white;
+    background-color: white !important;
     overflow: hidden;
 }
 
@@ -108,4 +109,20 @@ canvas {
 .page canvas {
     width: 100% !important;
     height: 100% !important;
+    display: block;
+    box-shadow: 0 0 0 1px white; 
+}
+
+#diario-container .page:nth-child(odd) {
+    z-index: 2;
+}
+
+#diario-container .page:nth-child(even) {
+    margin-left: -2px !important;
+    z-index: 1;
+}
+
+#diario-container .page:nth-child(odd),
+#diario-container .page:nth-child(even) {
+    box-shadow: none !important;
 }

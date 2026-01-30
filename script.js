@@ -33,11 +33,13 @@ async function startDiario() {
             height: calcH, 
             size: "fixed",
             mode: "double",
-            drawShadow: true,
+            drawShadow: false, 
             showCover: false,
             usePortrait: false,
-            mobileScrollSupport: true,
-            maxShadowOpacity: 0.5
+            flippingTime: 1000,
+            swipeDistance: 30,
+            showPageCorners: false,
+            disableCanvasCopy: true 
         })
 
         paginaFlip.loadFromHTML(document.querySelectorAll('.page'))
@@ -62,16 +64,22 @@ async function startDiario() {
 }
 
 async function renderHalfPage(pagina, viewport, side, container) {
-    const paginaDiv = document.createElement('div')
-    paginaDiv.className = 'page'
-    const canvas = document.createElement('canvas')
-    const context = canvas.getContext('2d')
-    canvas.width = viewport.width / 2
-    canvas.height = viewport.height
-    paginaDiv.appendChild(canvas)
-    container.appendChild(paginaDiv)
-    const transform = side === 'right' ? [1, 0, 0, 1, -(viewport.width / 2), 0] : [1, 0, 0, 1, 0, 0]
-    return pagina.render({canvasContext: context, viewport: viewport, transform: transform}).promise
+    const paginaDiv = document.createElement('div');
+    paginaDiv.className = 'page';
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    
+    canvas.width = viewport.width / 2;
+    canvas.height = viewport.height;
+    
+    paginaDiv.appendChild(canvas);
+    container.appendChild(paginaDiv);
+
+    const transform = side === 'right' 
+        ? [1, 0, 0, 1, -(viewport.width / 2), 0] 
+        : [1, 0, 0, 1, 0, 0];
+
+    return pagina.render({canvasContext: context, viewport: viewport, transform: transform}).promise;
 }
 
 startDiario()
