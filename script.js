@@ -11,19 +11,17 @@ async function startDiario() {
         const tempViewport = primeiraPagina.getViewport({ scale: 1 });
         const realRatio = (tempViewport.width / 2) / tempViewport.height;
 
-        const paddingCapas = 100;
-        let calcH = window.innerHeight * 0.95; 
+        let calcH = window.innerHeight * 0.85; 
         let calcW = calcH * realRatio;
 
-        if ((calcW * 2) > window.innerWidth) {
-            calcW = (window.innerWidth * 0.98) / 2;
+        if ((calcW * 2) > (window.innerWidth * 0.9)) {
+            calcW = (window.innerWidth * 0.9) / 2;
             calcH = calcW / realRatio;
         }
 
         for (let i = 1; i <= pdf.numPages; i++) {
             const pagina = await pdf.getPage(i)
             const viewport = pagina.getViewport({ scale: 3.0 }); 
-
             await renderHalfPage(pagina, viewport, 'left', container)
             await renderHalfPage(pagina, viewport, 'right', container)
         }
@@ -36,21 +34,20 @@ async function startDiario() {
             drawShadow: false, 
             showCover: false,
             usePortrait: false,
-            flippingTime: 1000,
-            swipeDistance: 30,
-            showPageCorners: false,
-            disableCanvasCopy: true 
+            mobileScrollSupport: true
         })
 
         paginaFlip.loadFromHTML(document.querySelectorAll('.page'))
+
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => location.reload(), 500);
+        });
 
         setTimeout(() => {
             const loader = document.getElementById('loader');
             loader.classList.add('loader-hidden');
             container.classList.add('st--ready');
         }, 500)
-
-        container.classList.add('st--ready')
 
         container.addEventListener('wheel', (e) => {
             if (e.deltaY > 0) paginaFlip.flipNext()

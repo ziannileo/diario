@@ -62,6 +62,44 @@ body {
     100% { transform: rotate(-45deg) scale(1); }
 }
 
+#orientacao-aviso {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background-color: #1a1a1a;
+    color: #d4a373;
+    z-index: 10000;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Georgia', serif;
+}
+
+.phone-icon {
+    width: 40px; height: 70px;
+    border: 3px solid #d4a373;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    animation: rotatePhone 2s infinite ease-in-out;
+}
+
+@keyframes rotatePhone {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(90deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@media (max-width: 900px) and (orientation: portrait) {
+    #orientacao-aviso { display: flex; }
+}
+
+@media (max-height: 500px) {
+    .diario-render {
+        padding: 10px 15px;
+    }
+}
+
 .loader-hidden {
     opacity: 0;
     visibility: hidden;
